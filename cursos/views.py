@@ -1,4 +1,4 @@
-from rest_framework import generics, viewsets
+from rest_framework import generics, mixins, viewsets
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
@@ -57,6 +57,12 @@ class CursoViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
+"""
 class AvaliacaoViewSet(viewsets.ModelViewSet):
+    queryset = Avaliacao.objects.all()
+    serializer_class = AvaliacaoSerializer
+"""
+
+class AvaliacaoViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet): # noqa
     queryset = Avaliacao.objects.all()
     serializer_class = AvaliacaoSerializer
