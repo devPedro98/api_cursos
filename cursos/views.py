@@ -1,4 +1,4 @@
-from rest_framework import generics, mixins, viewsets
+from rest_framework import generics, mixins, permissions, viewsets
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
@@ -47,6 +47,7 @@ API V2
 
 
 class CursoViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.DjangoModelPermissions, )
     queryset = Curso.objects.all()
     serializer_class = CursoSerializer
 
